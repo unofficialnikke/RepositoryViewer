@@ -1,12 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import 'dotenv/config'
 
 const fetch = (...args) =>
     import('node-fetch').then(({ default: fetch }) => fetch(...args));
-
-const VITE_CLIENT_ID = '14341fb387d6942b3040'
-const VITE_CLIENT_SECRET = 'd09cde1f92689026550b881a45ee65926e63adcb'
 
 var app = express();
 
@@ -16,7 +14,7 @@ app.use(bodyParser.json());
 app.get('/getAccessToken', async function (req, res) {
     console.log(req.query.code);
 
-    const params = `?client_id=${VITE_CLIENT_ID}&client_secret=${VITE_CLIENT_SECRET}&code=${req.query.code}`;
+    const params = `?client_id=${process.env.VITE_CLIENT_ID}&client_secret=${process.env.VITE_CLIENT_SECRET}&code=${req.query.code}`;
 
     await fetch('https://github.com/login/oauth/access_token' + params, {
         method: 'POST',

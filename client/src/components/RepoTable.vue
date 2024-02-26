@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import { VITE_CLIENT_ID } from '../constants';
 type User = {
     id: string,

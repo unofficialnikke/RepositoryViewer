@@ -14,7 +14,6 @@
   "dependencies": {
     "@cscfi/csc-ui": "^2.0.2",
     "@cscfi/csc-ui-vue": "^0.0.2",
-    "axios": "^1.6.7",
     "vue": "^3.4.15"
   },
   "devDependencies": {

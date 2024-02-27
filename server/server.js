@@ -11,6 +11,7 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+/* The implementation below was coded by utilizing the following tutorial: https://www.youtube.com/watch?v=rRn2EisxPl4&t=1792s */
 app.get('/getAccessToken', async function (req, res) {
     const params = `?client_id=${process.env.VITE_CLIENT_ID}&client_secret=${process.env.VITE_CLIENT_SECRET}&code=${req.query.code}`;
 

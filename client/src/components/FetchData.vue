@@ -18,7 +18,6 @@ async function getToken() {
             const data = await response.json();
             if (data.access_token) {
                 localStorage.setItem('accessToken', data.access_token);
-                console.log(data.access_token);
                 window.location.href = '/';
             }
         } catch (error) {
@@ -29,7 +28,7 @@ async function getToken() {
 
 defineExpose({
     login,
-    getToken
+    getToken,
 });
 
 </script>

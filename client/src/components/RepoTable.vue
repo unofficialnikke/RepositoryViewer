@@ -47,16 +47,15 @@ async function login() {
 onMounted(async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    console.log(code);
 
     if (code) {
         try {
             const response = await fetch(`http://localhost:4000/getAccessToken?code=${code}`);
             const data = await response.json();
-            const accessToken = data.access_token;
-            localStorage.setItem('accessToken', accessToken);
-
-            window.location.href = '/';
+            if (data.access_token) {
+                localStorage.setItem('accessToken', data.access_token);
+                window.location.href = '/';
+            }
         } catch (error) {
             console.error(error);
         }

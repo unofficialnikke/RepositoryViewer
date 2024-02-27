@@ -12,36 +12,45 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.get('/getAccessToken', async function (req, res) {
-    console.log(req.query.code);
-
     const params = `?client_id=${process.env.VITE_CLIENT_ID}&client_secret=${process.env.VITE_CLIENT_SECRET}&code=${req.query.code}`;
 
-    await fetch('https://github.com/login/oauth/access_token' + params, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json'
+    if (params) {
+        const requestConfig = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            }
         }
-    }).then((response) => {
-        return response.json();
-    }).then((data) => {
-        console.log(data)
-        res.json(data);
-    });
+        try {
+            const response = await fetch('https://github.com/login/oauth/access_token' + params, requestConfig);
+            if (!response.ok) {
+                alert('An error happened during fetch');
+            } else {
+                const data = await response.json();
+                console.log(data);
+                res.json(data);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
 })
 
 app.get('/getUserData', async function (req, res) {
     req.get("Authorization");
-    await fetch('https://api.github.com/user', {
+    const requestConfig = {
         method: 'GET',
         headers: {
             'Authorization': req.get('Authorization')
         }
-    }).then((response) => {
-        return response.json();
-    }).then((data) => {
-        console.log(data);
+    }
+    try {
+        const response = await fetch('https://api.github.com/user', requestConfig);
+        const data = await response.json();
         res.json(data);
-    })
+    } catch (err) {
+        console.error(err);
+    }
 })
 
 app.listen(4000, function () {

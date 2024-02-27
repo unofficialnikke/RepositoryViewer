@@ -17,12 +17,14 @@
         </table>
     </c-table>
     -->
-    <c-button @click="login" id="login">Sign in</c-button>
+    <c-button @click="userLogin" id="login">Sign in</c-button>
+    <FetchData ref="dataFetch" />
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { VITE_CLIENT_ID } from '../constants';
+import { onMounted, ref } from 'vue';
+import FetchData from './FetchData.vue';
+/*
 type User = {
     id: string,
     name: string,
@@ -39,26 +41,18 @@ defineProps({
         required: true
     }
 })
+*/
+const dataFetch = ref<typeof FetchData | null>(null);
 
-async function login() {
-    window.location.assign('https://github.com/login/oauth/authorize?client_id=' + VITE_CLIENT_ID)
+const userLogin = () => {
+    if (dataFetch.value) {
+        dataFetch.value.login()
+    }
+
 }
-
 onMounted(async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-
-    if (code) {
-        try {
-            const response = await fetch(`http://localhost:4000/getAccessToken?code=${code}`);
-            const data = await response.json();
-            if (data.access_token) {
-                localStorage.setItem('accessToken', data.access_token);
-                window.location.href = '/';
-            }
-        } catch (error) {
-            console.error(error);
-        }
+    if (dataFetch.value) {
+        dataFetch.value.getToken()
     }
 })
 

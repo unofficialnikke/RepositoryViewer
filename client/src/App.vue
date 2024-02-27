@@ -1,5 +1,5 @@
 <template>
-  <RepoTable :users="users" :headers="headers" />
+  <RepoTable />
 </template>
 
 <script setup lang="ts">

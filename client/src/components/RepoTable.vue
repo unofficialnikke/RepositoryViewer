@@ -1,19 +1,21 @@
 <template>
-    <div class="container">
-        <template v-if="!accessToken">
+    <c-page class="container">
+        <div v-if="!accessToken" class="header">
             <h2>Not logged in</h2>
             <c-button @click="userLogin" id="login">
                 <c-icon :path="mdiLogin" />
                 Sign in
             </c-button>
-        </template>
-        <template v-else>
-            <h2>Currently logged in</h2>
-            <c-button @click="userLogout">
-                <c-icon :path="mdiLogout" />
-                Sign out
-            </c-button>
-            <h2>Starred repositories for {{ userName }} ({{ userRepos.length }} repositories)</h2>
+        </div>
+        <div v-else>
+            <div class="header">
+                <h2>Currently logged in</h2>
+                <c-button @click="userLogout">
+                    <c-icon :path="mdiLogout" />
+                    Sign out
+                </c-button>
+                <h2>Starred repositories for {{ userName }} ({{ userRepos.length }} repositories)</h2>
+            </div>
             <c-table responsive class="custom-table">
                 <table>
                     <thead>
@@ -36,9 +38,9 @@
                     </tbody>
                 </table>
             </c-table>
-        </template>
-        <FetchData ref="dataFetch" />
-    </div>
+        </div>
+    </c-page>
+    <FetchData ref="dataFetch" />
 </template>
 
 <script setup lang="ts">
@@ -107,10 +109,13 @@ onMounted(async () => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+}
+
+.header {
+    text-align: center;
 }
 
 .custom-table {
-    width: 85%;
+    max-width: 100%;
 }
 </style>

@@ -1,25 +1,34 @@
 <template>
-    <!--
-    <c-table responsive class="custom-table">
-        <table>
-            <tbody>
-                <tr v-for="user in userData" :key="user.login">
-                    <td>{{ user.login }}</td>
-                    <td>{{ user.login }}</td>
-                    <td>{{ user.location }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </c-table>
--->
-    <template v-if="!currentAccessToken">
+    <template v-if="!accessToken">
         <h2>Not logged in</h2>
         <c-button @click="userLogin" id="login">Sign in</c-button>
     </template>
     <template v-else>
         <h2>Currently logged in</h2>
-        <c-button @click="userLogout" id="login">Sign out</c-button>
-        <c-button @click="getUserData" id="login">Get user data</c-button>
+        <c-button @click="userLogout">Sign out</c-button>
+        <c-table responsive class="custom-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Topics</th>
+                        <th>Licenses</th>
+                        <th>Repository URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="repo in userRepos" :key="repo.name">
+                        <td>{{ repo.name }}</td>
+                        <td>{{ repo.description }}</td>
+                        <td>{{ repo.topics.length > 0 ? repo.topics.join(', ') : 'No topics' }}</td>
+                        <td>{{ repo.license === null ? 'No licenses' : repo.license }}</td>
+                        <td>{{ repo.html_url }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </c-table>
+
     </template>
 
     <FetchData ref="dataFetch" />
@@ -28,43 +37,22 @@
 <script setup lang="ts">
 import { onMounted, ref, type Ref } from 'vue';
 import FetchData from './FetchData.vue';
-import type { dataOfUser } from '../type';
-/*
-type User = {
-    id: string,
-    name: string,
-    ssn: string
-}
+import type { IFetchData, IStarredRepos } from '../interface';
 
-defineProps({
-    users: {
-        type: Array as () => User[],
-        required: true,
-    },
-    headers: {
-        type: Array as () => string[],
-        required: true
-    }
-})
-*/
+const accessToken = ref();
+const userName = ref();
+const userRepos: Ref<IStarredRepos[]> = ref([]);
 
-const userData: Ref<dataOfUser[]> = ref([])
-
-const currentAccessToken = ref();
-
-const dataFetch = ref<typeof FetchData | null>(null);
+const dataFetch = ref<IFetchData>();
 
 const userLogin = () => {
     if (dataFetch.value) {
         dataFetch.value.login()
-        currentAccessToken.value = localStorage.getItem('accessToken');
-        console.log('Login ' + currentAccessToken.value)
     }
 }
 
 const userLogout = () => {
     localStorage.removeItem('accessToken');
-    currentAccessToken.value = '';
     window.location.href = '/';
 }
 
@@ -78,18 +66,31 @@ async function getUserData() {
     try {
         const response = await fetch('http://localhost:4000/getUserData', requestConfig)
         const data = await response.json();
-        console.log(data);
-        userData.value = data;
+        userName.value = data.login;
+        if (userName.value) {
+            getRepos();
+        }
     } catch (err) {
         console.error(err);
     }
 }
 
+async function getRepos() {
+    try {
+        const response = await fetch(`https://api.github.com/users/${userName.value}/starred`)
+        const data = await response.json();
+        userRepos.value = data;
+        console.log('repos got')
+    } catch (err) {
+        console.error(err)
+    }
+}
+
 onMounted(async () => {
     if (dataFetch.value) {
-        currentAccessToken.value = localStorage.getItem('accessToken');
-        console.log('mountd ' + currentAccessToken.value);
         dataFetch.value.getToken()
+        accessToken.value = localStorage.getItem('accessToken');
+        getUserData();
     }
 })
 

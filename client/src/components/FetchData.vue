@@ -3,6 +3,7 @@
 
 <script setup lang="ts">
 import { VITE_CLIENT_ID } from '../constants';
+import type { IFetchData } from '../interface';
 
 async function login() {
     window.location.assign('https://github.com/login/oauth/authorize?client_id=' + VITE_CLIENT_ID)
@@ -26,9 +27,9 @@ async function getToken() {
     }
 }
 
-defineExpose({
+defineExpose<IFetchData>({
     login,
-    getToken,
+    getToken
 });
 
 </script>

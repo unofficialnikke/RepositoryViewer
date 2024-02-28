@@ -27,6 +27,7 @@ async function getToken() {
     }
 }
 
+
 defineExpose<IFetchData>({
     login,
     getToken

@@ -1,48 +1,55 @@
 <template>
-    <template v-if="!accessToken">
-        <h2>Not logged in</h2>
-        <c-button @click="userLogin" id="login">Sign in</c-button>
-    </template>
-    <template v-else>
-        <h2>Currently logged in</h2>
-        <c-button @click="userLogout">Sign out</c-button>
-        <c-table responsive class="custom-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Topics</th>
-                        <th>Licenses</th>
-                        <th>Repository URL</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="repo in userRepos" :key="repo.name">
-                        <td>{{ repo.name }}</td>
-                        <td>{{ repo.description }}</td>
-                        <td>{{ repo.topics.length > 0 ? repo.topics.join(', ') : 'No topics' }}</td>
-                        <td>{{ repo.license === null ? 'No licenses' : repo.license }}</td>
-                        <td>{{ repo.html_url }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </c-table>
-
-    </template>
-
-    <FetchData ref="dataFetch" />
+    <div class="container">
+        <template v-if="!accessToken">
+            <h2>Not logged in</h2>
+            <c-button @click="userLogin" id="login">
+                <c-icon :path="mdiLogin" />
+                Sign in
+            </c-button>
+        </template>
+        <template v-else>
+            <h2>Currently logged in</h2>
+            <c-button @click="userLogout">
+                <c-icon :path="mdiLogout" />
+                Sign out
+            </c-button>
+            <h2>Starred repositories for {{ userName }} ({{ userRepos.length }} repositories)</h2>
+            <c-table responsive class="custom-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Topics</th>
+                            <th>Licenses</th>
+                            <th>Repository URL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="repo in userRepos" :key="repo.name">
+                            <td>{{ repo.name }}</td>
+                            <td>{{ repo.description }}</td>
+                            <td>{{ repo.topics.length > 0 ? repo.topics.join(', ') : 'No topics' }}</td>
+                            <td>{{ repo.license === null ? 'No licenses' : repo.license }}</td>
+                            <td><a :href="repo.html_url" target="_blank">{{ repo.html_url }}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </c-table>
+        </template>
+        <FetchData ref="dataFetch" />
+    </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref, type Ref } from 'vue';
+import { mdiLogin, mdiLogout } from '@mdi/js'
 import FetchData from './FetchData.vue';
 import type { IFetchData, IStarredRepos } from '../interface';
 
 const accessToken = ref();
 const userName = ref();
 const userRepos: Ref<IStarredRepos[]> = ref([]);
-
 const dataFetch = ref<IFetchData>();
 
 const userLogin = () => {
@@ -93,5 +100,17 @@ onMounted(async () => {
         getUserData();
     }
 })
-
 </script>
+
+<style>
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-table {
+    width: 85%;
+}
+</style>

@@ -1,4 +1,4 @@
-# Applicationg for viewing Starred Repositories
+# Application for viewing Starred Repositories
 
 ## Overview
 This application allows users to authenticate via GitHub OAuth and fetch their starred repositories. It's built using Vue 3 and TypeScript for the frontend, and Node.js with JavaScript for the backend.

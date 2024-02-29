@@ -9,16 +9,16 @@
         </div>
         <div v-else>
             <div class="header">
-                <h2>Signed in as {{ userName }}</h2>
+                <h2>Currently signed in</h2>
                 <c-button @click="userLogout">
                     <c-icon :path="mdiLogout" />
                     Sign out
                 </c-button>
                 <div v-if="userRepos.length <= 0">
-                    <h2>You have no starred repositories</h2>
+                    <h2>No starred repositories for {{ userName }}</h2>
                 </div>
                 <div v-else>
-                    <h2>Found total of {{ userRepos.length }} starred repositories</h2>
+                    <h2>Starred repositories for {{ userName }} ({{ userRepos.length }} repositories)</h2>
                     <c-table responsive class="custom-table">
                         <table>
                             <thead>

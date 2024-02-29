@@ -16,7 +16,7 @@ This application allows users to authenticate via GitHub OAuth and fetch their s
 You may also refer to this documentation for more detailed instructions: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app.
 
 ## Environment Variables:
-Create a .env file in the root directory of the backend.
+Create a .env file in the root directory of both frontend and the backend.
 
 ```
 VITE_CLIENT_ID=<your-github-client-id>

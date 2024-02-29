@@ -1,7 +1,7 @@
 <template>
     <c-page class="container">
         <div v-if="!accessToken" class="header">
-            <h2>Not logged in</h2>
+            <h2>Not signed in</h2>
             <c-button @click="userLogin" id="login">
                 <c-icon :path="mdiLogin" />
                 Sign in
@@ -9,35 +9,40 @@
         </div>
         <div v-else>
             <div class="header">
-                <h2>Currently logged in</h2>
+                <h2>Currently signed in</h2>
                 <c-button @click="userLogout">
                     <c-icon :path="mdiLogout" />
                     Sign out
                 </c-button>
-                <h2>Starred repositories for {{ userName }} ({{ userRepos.length }} repositories)</h2>
+                <div v-if="userRepos.length <= 0">
+                    <h2>No starred repositories for {{ userName }}</h2>
+                </div>
+                <div v-else>
+                    <h2>Starred repositories for {{ userName }} ({{ userRepos.length }} repositories)</h2>
+                    <c-table responsive class="custom-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Topics</th>
+                                    <th>Licenses</th>
+                                    <th>Repository URL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="repo in userRepos" :key="repo.name">
+                                    <td>{{ repo.name }}</td>
+                                    <td>{{ repo.description }}</td>
+                                    <td>{{ repo.topics.length > 0 ? repo.topics.join(', ') : 'No topics' }}</td>
+                                    <td>{{ repo.license === null ? 'No licenses' : repo.license }}</td>
+                                    <td><a :href="repo.html_url" target="_blank">{{ repo.html_url }}</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </c-table>
+                </div>
             </div>
-            <c-table responsive class="custom-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Topics</th>
-                            <th>Licenses</th>
-                            <th>Repository URL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="repo in userRepos" :key="repo.name">
-                            <td>{{ repo.name }}</td>
-                            <td>{{ repo.description }}</td>
-                            <td>{{ repo.topics.length > 0 ? repo.topics.join(', ') : 'No topics' }}</td>
-                            <td>{{ repo.license === null ? 'No licenses' : repo.license }}</td>
-                            <td><a :href="repo.html_url" target="_blank">{{ repo.html_url }}</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </c-table>
         </div>
     </c-page>
     <FetchData ref="dataFetch" />
@@ -117,5 +122,6 @@ onMounted(async () => {
 
 .custom-table {
     max-width: 100%;
+    text-align: left;
 }
 </style>

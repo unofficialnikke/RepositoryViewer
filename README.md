@@ -26,6 +26,7 @@ git clone <repository-url>
 ## Install and run the Application:
 
 ### Frontend:
+(from the root directory)
 ```
 cd .\client\
 npm install
@@ -33,6 +34,7 @@ npm run dev
 ```
 
 ### Backend: 
+(from the root directory)
 ```
 cd .\server\
 npm install

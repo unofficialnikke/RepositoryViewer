@@ -8,7 +8,7 @@ This application allows users to authenticate via GitHub OAuth and fetch their s
 • Fetching and displaying user's starred repositories
 
 ## Create GitHub OAuth Application:
-1. Go to your GitHub account settings.\
+1. Go to your GitHub account settings.
 2. Navigate to "Developer settings" > "OAuth Apps" > "New OAuth App".\
 3. Fill in the required details, such as the application name, homepage URL (e.g., http://localhost:5173), and callback URL (e.g., http://localhost:5173/callback). \
 4 After creating the OAuth app, note down the client ID and client secret. // reform the "you may also check this documentation" to better form

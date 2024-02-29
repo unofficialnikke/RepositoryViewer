@@ -5,7 +5,7 @@ This application allows users to authenticate via GitHub OAuth and fetch their s
 
 ## Features
 • User authentication via GitHub OAuth \
-• Fetching and displaying user's starred repositories \
+• Fetching and displaying user's starred repositories
 
 ## Configuration
 

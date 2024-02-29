@@ -21,8 +21,6 @@ Clone the Repository:
 ```
 git clone <repository-url>
 ```
-## Install and run the Application:
-
 ### Frontend:
 (from the root directory)
 ```

@@ -43,12 +43,12 @@ VITE_CLIENT_SECRET=<your-github-client-secret>
 
 ## Running the application:
 
-1. Start the backend development server:
+1. Start the backend:
 ```
 cd .\server\
 npm run dev
 ```
-2. Start the frontend development server:
+2. Start the frontend:
 ```
 cd .\client\
 npm run dev

@@ -21,6 +21,9 @@ Clone the Repository:
 ```
 git clone <repository-url>
 ```
+
+## Install dependencies:
+
 ### Frontend:
 (from the root directory)
 ```

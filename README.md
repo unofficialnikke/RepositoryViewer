@@ -34,7 +34,7 @@ npm install
 ```
 
 ## Environment Variables:
-Create .env files in the root directory of both frontend and the backend (client and server).
+Create .env files in the root directories of both frontend and the backend (client and server).
 
 ```
 VITE_CLIENT_ID=<your-github-client-id>

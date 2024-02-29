@@ -15,7 +15,7 @@ This application allows users to authenticate via GitHub OAuth and fetch their s
 • After creating the OAuth app, note down the client ID and client secret. // reform the "you may also check this documentation" to better form
 Environment Variables:
 
-## Installation
+## Installation and running the Application
 Clone the Repository:
 
 ```

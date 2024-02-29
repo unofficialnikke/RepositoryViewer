@@ -24,16 +24,15 @@ git clone <repository-url>
 
 ### Install dependencies:
 
-#### Frontend:
-(from the root directory)
+#### Frontend (from the root directory):
+
 ```
 cd .\client\
 npm install
 npm run dev
 ```
 
-#### Backend: 
-(from the root directory)
+#### Backend (from the root directory): 
 ```
 cd .\server\
 npm install

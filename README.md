@@ -56,6 +56,6 @@ npm run dev
 3. Open your web browser and navigate to the URL http://localhost:5173.
 
 ## Additional Information
-• Remember to add your GitHub OAuth client ID and client secret to the .env files in both the frontend and backend directories before running the application.
+• Remember to add your GitHub OAuth client ID and client secret to the .env files in both the frontend and backend directories before running the application. \
 • This installation guide is created by utilizing ChatGPT language model.
 

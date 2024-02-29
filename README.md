@@ -45,8 +45,8 @@ npm run dev
 
 ### Add the following environment variables:
 ```
-CLIENT_ID=<your-github-client-id>
-CLIENT_SECRET=<your-github-client-secret>
+VITE_CLIENT_ID=<your-github-client-id>
+VITE_CLIENT_SECRET=<your-github-client-secret>
 ```
 • Open your web browser and navigate to the specified URL http://localhost:5173.
 

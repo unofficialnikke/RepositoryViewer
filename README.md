@@ -15,16 +15,16 @@ This application allows users to authenticate via GitHub OAuth and fetch their s
 • After creating the OAuth app, note down the client ID and client secret. // reform the "you may also check this documentation" to better form
 Environment Variables:
 
-### Installation and running the Application
+## Installation and running the Application
 Clone the Repository:
 
 ```
 git clone <repository-url>
 ```
 
-#### Install dependencies:
+### Install dependencies:
 
-Frontend:
+#### Frontend:
 (from the root directory)
 ```
 cd .\client\
@@ -32,7 +32,7 @@ npm install
 npm run dev
 ```
 
-Backend: 
+#### Backend: 
 (from the root directory)
 ```
 cd .\server\

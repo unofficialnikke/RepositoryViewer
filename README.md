@@ -15,14 +15,6 @@ This application allows users to authenticate via GitHub OAuth and fetch their s
 
 You may also refer to this documentation for more detailed instructions: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app.
 
-## Environment Variables:
-Create a .env file in the root directory of both frontend and the backend (client and server).
-
-```
-VITE_CLIENT_ID=<your-github-client-id>
-VITE_CLIENT_SECRET=<your-github-client-secret>
-```
-
 ## Installation
 1. Clone the Repository:
 ```
@@ -39,6 +31,14 @@ npm install
 
 cd .\server\
 npm install
+```
+
+## Environment Variables:
+Create a .env file in the root directory of both frontend and the backend (client and server).
+
+```
+VITE_CLIENT_ID=<your-github-client-id>
+VITE_CLIENT_SECRET=<your-github-client-secret>
 ```
 
 ## Running the application:

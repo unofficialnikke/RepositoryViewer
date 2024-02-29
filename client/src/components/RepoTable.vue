@@ -54,8 +54,8 @@ import { mdiLogin, mdiLogout } from '@mdi/js'
 import FetchData from './FetchData.vue';
 import type { IFetchData, IStarredRepos } from '../interface';
 
-const accessToken = ref();
-const userName = ref();
+const accessToken = ref<string | null>('');
+const userName = ref<string>('');
 const userRepos: Ref<IStarredRepos[]> = ref([]);
 const dataFetch = ref<IFetchData>();
 
